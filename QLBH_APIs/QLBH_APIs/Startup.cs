@@ -1,11 +1,17 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using QLBH_APIs.Data;
+using QLBH_APIs.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +31,23 @@ namespace QLBH_APIs
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Kết nối đến sql server.
+            string connectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<AppDbContext>(c => c.UseSqlServer(connectionString));
+
+            services.AddScoped<UserRepository>();
+            services.AddScoped<ItemRepository>();
+            services.AddScoped<CategoryRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "QLBH_APIs", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "QLBH_APIs",
+                    Version = "v1",
+                    Description = "ASP.Net Core Web API"
+                });
             });
         }
 
@@ -41,7 +59,7 @@ namespace QLBH_APIs
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "QLBH_APIs v1"));
-            }
+            }         
 
             app.UseRouting();
 
