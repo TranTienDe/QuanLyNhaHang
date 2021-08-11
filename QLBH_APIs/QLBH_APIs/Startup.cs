@@ -35,9 +35,17 @@ namespace QLBH_APIs
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AppDbContext>(c => c.UseSqlServer(connectionString));
 
-            services.AddScoped<UserRepository>();
-            services.AddScoped<ItemRepository>();
             services.AddScoped<CategoryRepository>();
+            services.AddScoped<GuestRepository>();
+            services.AddScoped<GuestTableRepository>();
+            services.AddScoped<ItemRepository>();
+            services.AddScoped<OrderRepository>();
+            services.AddScoped<OrderItemRepository>();
+            services.AddScoped<RoleRepository>();
+            services.AddScoped<StatusRepository>();
+            services.AddScoped<UnitRepository>();
+            services.AddScoped<UnitTypeRepository>();
+            services.AddScoped<UserRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -59,7 +67,7 @@ namespace QLBH_APIs
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "QLBH_APIs v1"));
-            }         
+            }
 
             app.UseRouting();
 

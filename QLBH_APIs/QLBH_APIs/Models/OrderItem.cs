@@ -7,23 +7,19 @@ using System.Threading.Tasks;
 namespace QLBH_APIs.Models
 {
     /// <summary>
-    /// Bảng chứa danh sách món, đồ ăn, uống.
+    /// Chi tiết món hàng bán trong order.
     /// </summary>
-    public class Item
+    public class OrderItem
     {
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public double Price { get; set; }    //Giá bán
-        public double Discount { get; set; } //Giảm giá
-        public int Quantity { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
         public bool Deleted { get; set; }
-
-        public virtual Unit Unit { get; set; }
-        public virtual Category Category { get; set; }
-        public virtual IList<ItemImage> ItemImage { get; set; }
+        public bool Voided { get; set; }  //Hủy bỏ
+        public double SalePrice { get; set; }      
+        public virtual Item Item { get; set; } //Tên món
     }
 }
