@@ -35,6 +35,7 @@ namespace QLBH_APIs
             string connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<AppDbContext>(c => c.UseSqlServer(connectionString));
 
+            // Repository.
             services.AddScoped<CategoryRepository>();
             services.AddScoped<GuestRepository>();
             services.AddScoped<GuestTableRepository>();
@@ -47,7 +48,10 @@ namespace QLBH_APIs
             services.AddScoped<UnitTypeRepository>();
             services.AddScoped<UserRepository>();
 
+            // Controller.
             services.AddControllers();
+
+            // Swagger.
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo

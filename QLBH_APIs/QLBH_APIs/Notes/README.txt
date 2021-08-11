@@ -24,4 +24,12 @@ Install-Package Swashbuckle.AspNetCore
 # 5005 - .NET Core - Angular 12 - Quản Lý Nhà Hàng - Web APIs. POST dữ liệu. Chú thích ở trang Swagger
 https://www.youtube.com/watch?v=jVOMjvZmyYU
 
+# 5006 - .NET Core - Angular 12 - Giới thiệu Trello để quản lý tickets và bugs + nhìn tổng quát ...
+https://www.youtube.com/watch?v=f2epv-P6Vvg
+
+# 5007 - .NET Core - Angular 12 - Quản Lý Nhà Hàng - Setup Angular project (Admin) cho coder ra sao ?
+https://www.youtube.com/watch?v=8Ctq6LBVdOI
+
+
+
 
